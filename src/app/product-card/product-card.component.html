@@ -1,0 +1,20 @@
+<div class="card h-100">
+    <div class="image-container">
+        <img [src]="productItem.thumbnail" class="card-img-top" alt="product image" />
+    </div>
+    <div class="card-body">
+        <a class="d-block" style="font-weight: 600;text-decoration: none;color: black; font-size: 18px;" [routerLink]="['product-details', productItem.id]">{{ productItem.title | uppercase }}</a>
+        <p class="card-text">{{ productItem.description }}</p>
+        <p class="card-text"style="font-weight: 600;"><span><del>${{ productItem.price}}</del> -
+        ${{ productItem| discount }}</span></p>
+        <p class="card-text">Rating: <span *ngFor="let star of getStars(productItem.rating)">
+            <i class="bi bi-star-fill px-1" style="color: rgb(22, 178, 92);"></i>
+          </span></p>
+        <p class="card-text" style="font-weight: 600;" [ngClass]="{ 'text-danger': productItem.stock === 0, 'text-success': productItem.stock > 0 }">
+            {{ productItem.stock === 0 ? 'Out of stock' : 'In stock' }}
+        </p>
+        <button class="btn btn-dark" [disabled]="isInCart(productItem.id) || productItem.stock === 0" (click)="addToCart(productItem.id)">
+            Add to Cart
+        </button>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<h2 class="text-center text-primary py-4" style="font-weight: bold">Register</h2>
+<div class="container">
+<form [formGroup]="registerForm" (ngSubmit)="handleSubmitForm()">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="email" formControlName="email"/>
+      @if(registerForm.controls['email'].invalid && registerForm.controls['email'].touched){
+        <div class="form-text text-danger">
+          @if(registerForm.controls['email'].errors?.['required']){
+            <span>Email address is required</span>
+          }
+          @if(registerForm.controls['email'].errors?.['email']){
+            <span>Please enter a valid email address</span>
+          }
+        </div>
+      }
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" formControlName="name"/>
+      @if(registerForm.controls['name'].invalid && registerForm.controls['name'].touched){
+        <div class="form-text text-danger">
+          @if(registerForm.controls['name'].errors?.['required']){
+            <span>Name is required</span>
+          }
+        </div>
+      }
+    </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" formControlName="username"/>
+      @if(registerForm.controls['username'].invalid && registerForm.controls['username'].touched){
+        <div class="form-text text-danger">
+          @if(registerForm.controls['username'].errors?.['required']){
+            <span>Username is required</span>
+          }
+          @if(registerForm.controls['username'].errors?.['pattern']){
+            <span>Username must not contain spaces</span>
+          }
+        </div>
+      }
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" formControlName="password"/>
+      @if(registerForm.controls['password'].invalid && registerForm.controls['password'].touched){
+        <div class="form-text text-danger">
+          @if(registerForm.controls['password'].errors?.['required']){
+            <span>Password is required</span>
+          }
+          @if(registerForm.controls['password'].errors?.['minlength']){
+            <span>Password must be at least 8 characters long</span>
+          }
+          @if(registerForm.controls['password'].errors?.['pattern']){
+            <span>Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character</span>
+          }
+        </div>
+      }
+    </div>
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">Confirm Password</label>
+      <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"/>
+      @if(registerForm.controls['confirmPassword'].invalid && registerForm.controls['confirmPassword'].touched){
+        <div class="form-text text-danger">
+          @if(registerForm.controls['confirmPassword'].errors?.['required']){
+            <span>Please confirm your password</span>
+          }
+          @if(registerForm.hasError('passwordMismatch') && registerForm.controls['confirmPassword'].touched){
+            <span>Passwords do not match</span>
+          }
+        </div>
+      }
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Submit</button>
+  </form>
+</div>

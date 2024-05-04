@@ -1,0 +1,56 @@
+<div class="my-5">
+    <div class="container py-5 px-5 shadow">
+        <div class="product-details bg-white p-5">
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img [src]="productDetails.thumbnail" alt="Product Image" class="img-fluid" />
+                </div>
+                <div class="col-md-6">
+                    <h2 class="fw-bold">{{ productDetails.title }}</h2>
+                    <p class="fs-6 text-muted mb-3">{{ productDetails.category }}</p>
+                    <p class="fs-6 mb-4">{{ productDetails.description }}</p>
+                    <p class="fs-5 mb-3" style="font-weight: bold;"><del style="color: brown;">${{ productDetails.price}}</del> - ${{ productDetails |discount }} or {{ calculateMonthlyPayment((productDetails | discount ), 8) }}/month</p>
+                    <p style="font-size: small; font-weight: 600;">Suggested payment with 8-month special financing</p>
+                    <span class="badge  my-3 text-{{ productDetails.stock === 0 ? 'bg-danger' : 'bg-success' }}">
+                        {{ productDetails.stock === 0 ? 'Out of Stock' : 'In Stock' }}
+                    </span>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="fw-bold mb-1">Brand:</p>
+                            <p class="fs-6 mb-4">{{ productDetails.brand }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="fw-bold mb-1">Rating:</p>
+                            <p class="fs-6">
+                                <span *ngFor="let star of getStars(productDetails.rating)">
+                                  <i class="bi bi-star-fill px-1" style="color: rgb(22, 178, 92);"></i>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-dark me-3" (click)="handleUpdateQuantity(productDetails.id, - 1)" [disabled]="productDetails.quantity <= 1">-</button>
+                        <span class="quantity">{{getItemQuantity(productDetails.id)}}</span>
+                        <button class="btn btn-dark mx-4" (click)="handleUpdateQuantity(productDetails.id, 1)"[disabled]="productDetails.quantity >= productDetails.stock">+</button>
+                        <span class="fs-6 text-orange">
+                            Only <span class="fw-bold text-danger">{{ productDetails.stock }} Items</span> Left! Don't miss it
+                        </span>
+                    </div>
+                    
+                    <div class="d-flex align-items-center py-5">
+                        <button class="btn btn-dark" [disabled]="isInCart(productDetails.id) || productDetails.stock === 0" (click)="addToCart(productDetails.id)">
+                            Add to Cart
+                        </button>
+                        <span>
+                            <button class="btn btn-dark me-3 mx-2">
+                                {{ isProductInWishlist(productDetails.id) ? 'Added to whishlist' : 'Add to whishlist' }}
+                            </button>
+                        </span>
+                    </div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

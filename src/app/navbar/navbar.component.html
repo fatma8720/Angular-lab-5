@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <span class="navbar-brand px-5">Product app</span>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <a class="nav-link" routerLink="" routerLinkActive="active_link">Products</a>
+        <a class="nav-link" routerLink="fav" routerLinkActive="active_link">
+          <i class="bi bi-heart mx-3"></i> 
+        </a>
+        <div class="navbar-nav ms-auto"> 
+          <a class="nav-link" routerLink="register" routerLinkActive="active_link">Register</a>
+          <a class="nav-link" routerLink="login" routerLinkActive="active_link">Login</a>
+          <a class="nav-link" routerLink="cart" routerLinkActive="active_link">
+            <i class="bi bi-cart"></i> 
+            <span class="px-1">{{counter}}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  

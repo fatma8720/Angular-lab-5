@@ -1,0 +1,55 @@
+<h2 class="text-center text-primary py-4" style="font-weight: bold">Login</h2>
+<div class="container">
+  <form #loginForm="ngForm" (ngSubmit)="login(email.value, password.value)">
+    <div class="form-group">
+      <label for="email" class="form-label my-2">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        ngModel
+        required
+        email
+        autocomplete="off"
+        #email="ngModel"
+      />
+      @if(email.invalid && email.touched){
+      <div id="emailHelp" class="form-text text-danger">
+        @if(email.errors?.['required']){
+        <span>This field is required</span>
+        } @if(email.errors?.['email']){
+        <span>Should be an email</span>
+        }
+      </div>
+      }
+    </div>
+    <div class="form-group">
+      <label for="password" class="form-label my-2">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        autocomplete="off"
+        ngModel
+        required
+        #password="ngModel"
+      />
+      @if(password.invalid && password.touched){
+      <div id="passwordHelp" class="form-text text-danger">
+        @if(password.errors?.['required']){
+        <span>This field is required</span>
+        }
+      </div>
+      }
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary my-4"
+      [disabled]="loginForm.invalid"
+    >
+      Login
+    </button>
+  </form>
+</div>
